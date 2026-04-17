@@ -10,7 +10,7 @@ const encodeUrlController = async (req, res) => {
         if (existingUrl) {
             return res.status(200).json({
                 message: "Link đã tồn tại",
-                data: 'https://shorted-url-g5gz.onrender.com' + existingUrl.urlAfter
+                data: 'https://shorted-url-g5gz.onrender.com/' + existingUrl.urlAfter
             });
         }
 
