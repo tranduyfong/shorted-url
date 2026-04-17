@@ -22,7 +22,7 @@ const encodeUrlController = async (req, res) => {
 
         res.status(201).json({
             message: "Thêm link thành công",
-            data: 'http://localhost:3000/' + result
+            data: 'https://shorted-url-g5gz.onrender.com/' + result
         });
     } catch (error) {
         console.error(error);
