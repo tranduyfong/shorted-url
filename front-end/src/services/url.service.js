@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://shorted-url-g5gz.onrender.com';
 
 export const shortenUrlAPI = async (link) => {
     try {
