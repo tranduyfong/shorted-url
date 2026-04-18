@@ -4,9 +4,17 @@ import { CopyOutlined, SelectOutlined } from '@ant-design/icons';
 
 const { Paragraph } = Typography;
 
-const UrlTable = ({ data }) => {
+const BASE_DOMAIN = 'https://shorted-url-g5gz.onrender.com/';
+
+const UrlTable = ({ data, loading }) => {
+
+    const getFullUrl = (shortUrl) => {
+        if (!shortUrl) return '';
+        return shortUrl.startsWith('http') ? shortUrl : BASE_DOMAIN + shortUrl;
+    };
+
     const copyToClipboard = (text) => {
-        navigator.clipboard.writeText(text);
+        navigator.clipboard.writeText(getFullUrl(text));
         message.success('Đã copy link rút gọn!');
     };
 
@@ -33,11 +41,14 @@ const UrlTable = ({ data }) => {
             title: 'Link rút gọn (urlAfter)',
             dataIndex: 'urlAfter',
             key: 'urlAfter',
-            render: (text) => (
-                <a href={text} target="_blank" rel="noreferrer" className="text-blue-600 font-medium">
-                    {text}
-                </a>
-            ),
+            render: (text) => {
+                const fullLink = getFullUrl(text);
+                return (
+                    <a href={fullLink} target="_blank" rel="noreferrer" className="text-blue-600 font-medium">
+                        {fullLink}
+                    </a>
+                )
+            },
         },
         {
             title: 'Thao tác',
@@ -55,7 +66,7 @@ const UrlTable = ({ data }) => {
                         <Button
                             type="dashed"
                             icon={<SelectOutlined />}
-                            href={record.urlAfter}
+                            href={getFullUrl(record.urlAfter)}
                             target="_blank"
                         />
                     </Tooltip>
@@ -66,13 +77,14 @@ const UrlTable = ({ data }) => {
 
     return (
         <div className="bg-white p-4 rounded-2xl shadow-lg">
-            <h3 className="text-lg font-bold text-gray-800 mb-4">Danh sách Link đã tạo</h3>
+            <h3 className="text-lg font-bold text-gray-800 mb-4">Danh sách Link</h3>
             <Table
                 columns={columns}
                 dataSource={data}
+                loading={loading}
                 pagination={{ pageSize: 5 }}
                 scroll={{ x: 'max-content' }}
-                rowKey="id"
+                rowKey={(record) => record._id || record.id}
             />
         </div>
     );

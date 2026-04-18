@@ -1,6 +1,6 @@
 const UrlModel = require("../models/url.model");
 const { hashAndEncode } = require("../utils/hash.url");
-
+const deployUrl = 'https://shorted-url-g5gz.onrender.com/'
 const encodeUrlController = async (req, res) => {
     try {
         const { link } = req.body;
@@ -10,7 +10,7 @@ const encodeUrlController = async (req, res) => {
         if (existingUrl) {
             return res.status(200).json({
                 message: "Link đã tồn tại",
-                data: 'https://shorted-url-g5gz.onrender.com/' + existingUrl.urlAfter
+                data: deployUrl + existingUrl.urlAfter
             });
         }
 
@@ -22,7 +22,7 @@ const encodeUrlController = async (req, res) => {
 
         res.status(201).json({
             message: "Thêm link thành công",
-            data: 'https://shorted-url-g5gz.onrender.com/' + result
+            data: deployUrl + result
         });
     } catch (error) {
         console.error(error);
