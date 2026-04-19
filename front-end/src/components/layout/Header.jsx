@@ -20,6 +20,7 @@ function Header() {
                         <Link to="/" className="text-gray-700 hover:text-indigo-600 transition duration-300">Trang chủ</Link>
                         <Link to="/history" className="text-gray-700 hover:text-indigo-600 transition duration-300">Dự án</Link>
                         <Link to="/contact" className="text-gray-700 hover:text-indigo-600 transition duration-300">Liên hệ</Link>
+                        <Link to="/cooperate" className="text-gray-700 hover:text-indigo-600 transition duration-300">Hợp tác với chúng tôi</Link>
                     </nav>
                     <div className="md:hidden flex items-center">
                         <button
@@ -61,6 +62,7 @@ function Header() {
                     <Link to="/" onClick={toggleMobileMenu} className="block text-gray-700 hover:text-indigo-600 font-medium">Trang chủ</Link>
                     <Link to="/history" onClick={toggleMobileMenu} className="block text-gray-700 hover:text-indigo-600 font-medium">Dự án</Link>
                     <Link to="/contact" onClick={toggleMobileMenu} className="block text-gray-700 hover:text-indigo-600 font-medium">Liên hệ</Link>
+                    <Link to="/cooperate" onClick={toggleMobileMenu} className="block text-gray-700 hover:text-indigo-600 font-medium">Hợp tác với chúng tôi</Link>
                 </nav>
             </div>
         </header>

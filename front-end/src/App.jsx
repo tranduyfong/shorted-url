@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './components/error/ErrorPage';
 import LayoutWebsite from './index';
 import StorageUrl from './pages/StorageUrl';
+import Cooperate from './pages/Cooperate';
 
 const router = createBrowserRouter([
   {
@@ -13,7 +14,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "/", index: true, element: <Home /> },
-      { path: "/history", element: <StorageUrl /> }
+      { path: "/history", element: <StorageUrl /> },
+      { path: "/cooperate", element: <Cooperate /> }
     ]
   }
 ])
