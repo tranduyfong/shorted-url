@@ -7,8 +7,11 @@ import { useAuth } from '../context/AuthContext';
 const LoginPage = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
+    const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
     const onFinish = async (values) => {
+        setLoading(true);
         const res = await loginAccount(values.email, values.password)
         if (!res.data) {
             notification.error({
@@ -24,6 +27,8 @@ const LoginPage = () => {
         notification.success({
             message: "Đăng nhập thành công"
         });
+        form.resetFields();
+        setLoading(false)
         window.location.href = "/";
     };
 
@@ -76,6 +81,7 @@ const LoginPage = () => {
                                     htmlType="submit"
                                     block
                                     size="large"
+                                    loading={loading}
                                     className="bg-blue-600 hover:bg-blue-700 border-none rounded-lg font-bold h-12 text-base shadow-md transition-all"
                                 >
                                     Đăng nhập
