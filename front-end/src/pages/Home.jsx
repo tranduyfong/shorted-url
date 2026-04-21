@@ -22,7 +22,7 @@ const Home = () => {
             const newRecord = {
                 id: Date.now().toString(),
                 urlBefore: link,
-                urlAfter: response.data,
+                urlAfter: response,
             };
 
             setUrlList((prev) => [newRecord, ...prev]);
