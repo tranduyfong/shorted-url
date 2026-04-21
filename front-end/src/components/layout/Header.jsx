@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { isAuthenticated, logout } = useAuth();
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
@@ -20,7 +22,11 @@ function Header() {
                         <Link to="/" className="text-gray-700 hover:text-indigo-600 transition duration-300">Trang chủ</Link>
                         <Link to="/history" className="text-gray-700 hover:text-indigo-600 transition duration-300">Dự án</Link>
                         <Link to="/contact" className="text-gray-700 hover:text-indigo-600 transition duration-300">Liên hệ</Link>
-                        <Link to="/cooperate" className="text-gray-700 hover:text-indigo-600 transition duration-300">Hợp tác với chúng tôi</Link>
+                        <Link to="/cooperate" className=" hover:text-indigo-600 transition duration-300">Hợp tác với chúng tôi</Link>
+                        {isAuthenticated
+                            ? (<Link className="text-gray-700 transition duration-300 hover:text-red-500" onClick={logout}>Đăng xuất</Link>)
+                            : (<Link to="/login" className="text-gray-700 hover:text-indigo-600 transition duration-300">Đăng nhập</Link>)
+                        }
                     </nav>
                     <div className="md:hidden flex items-center">
                         <button
@@ -63,6 +69,9 @@ function Header() {
                     <Link to="/history" onClick={toggleMobileMenu} className="block text-gray-700 hover:text-indigo-600 font-medium">Dự án</Link>
                     <Link to="/contact" onClick={toggleMobileMenu} className="block text-gray-700 hover:text-indigo-600 font-medium">Liên hệ</Link>
                     <Link to="/cooperate" onClick={toggleMobileMenu} className="block text-gray-700 hover:text-indigo-600 font-medium">Hợp tác với chúng tôi</Link>
+                    {isAuthenticated
+                        ? (<Link onClick={() => { logout(); toggleMobileMenu() }} className="block text-red-500 font-medium">Đăng xuất</Link>)
+                        : (<Link to="/login" onClick={toggleMobileMenu} className="block text-gray-700 hover:text-indigo-600 font-medium">Đăng nhập</Link>)}
                 </nav>
             </div>
         </header>

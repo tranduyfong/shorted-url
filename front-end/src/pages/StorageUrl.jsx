@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { message } from "antd";
-import UrlTable from "../components/UrlTable";
+import UrlTable from "../components/home/UrlTable";
 import { getHistoryUrl } from "../services/url.service";
 
 const StorageUrl = () => {
@@ -11,7 +11,7 @@ const StorageUrl = () => {
         setIsLoading(true);
         try {
             const result = await getHistoryUrl();
-            setUrlList(result.data || result);
+            setUrlList(result);
         } catch (error) {
             message.error(error.message || 'Có lỗi xảy ra khi lấy dữ liệu!');
         } finally {

@@ -1,28 +1,43 @@
+const Account = require("../models/account.model");
 const UrlModel = require("../models/url.model");
 const { hashAndEncode } = require("../utils/hash.url");
 const deployUrl = 'https://shorted-url-g5gz.onrender.com/'
+
 const encodeUrlController = async (req, res) => {
     try {
         const { link } = req.body;
         if (!link) return res.status(400).json({ message: "Vui lòng cung cấp link" });
 
+        // Khởi tạo biến lưu trữ địa chỉ
+        let urlId;
+        let resultUrlAfter;
+
+        // Check exist
         let existingUrl = await UrlModel.findOne({ urlBefore: link });
+
         if (existingUrl) {
-            return res.status(200).json({
-                message: "Link đã tồn tại",
-                data: deployUrl + existingUrl.urlAfter
+            urlId = existingUrl._id;
+            resultUrlAfter = existingUrl.urlAfter;
+        } else {
+            const result = hashAndEncode(link);
+            const newUrl = await UrlModel.create({
+                urlBefore: link,
+                urlAfter: result
             });
+            urlId = newUrl._id;
+            resultUrlAfter = newUrl.urlAfter;
         }
 
-        const result = hashAndEncode(link);
-        await UrlModel.create({
-            urlBefore: link,
-            urlAfter: result
-        });
+        if (req.user && req.user.id) {
+            await Account.findByIdAndUpdate(
+                req.user.id,
+                { $addToSet: { links: urlId } }
+            );
+        }
 
         res.status(201).json({
-            message: "Thêm link thành công",
-            data: deployUrl + result
+            message: existingUrl ? "Link đã tồn tại" : "Thêm link thành công",
+            data: deployUrl + resultUrlAfter
         });
     } catch (error) {
         console.error(error);
