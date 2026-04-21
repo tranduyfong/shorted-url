@@ -6,6 +6,9 @@ import ErrorPage from './components/error/ErrorPage';
 import LayoutWebsite from './index';
 import StorageUrl from './pages/StorageUrl';
 import Cooperate from './pages/Cooperate';
+import LoginPage from './pages/Login';
+import RegisterPage from './pages/Register';
+import requireAuthLoader from './utils/auth';
 
 const router = createBrowserRouter([
   {
@@ -14,8 +17,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "/", index: true, element: <Home /> },
-      { path: "/history", element: <StorageUrl /> },
-      { path: "/cooperate", element: <Cooperate /> }
+      { path: "/history", element: <StorageUrl />, loader: requireAuthLoader },
+      { path: "/cooperate", element: <Cooperate /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/register", element: <RegisterPage /> }
     ]
   }
 ])

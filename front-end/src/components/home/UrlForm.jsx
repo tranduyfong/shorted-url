@@ -14,7 +14,7 @@ const UrlForm = ({ onUrlCreated }) => {
     };
 
     return (
-        <Card className="shadow-lg rounded-2xl border-none mb-8">
+        <Card className="shadow-lg rounded-2xl border-none mb-8" data-aos="fade-up">
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
                 Hệ Thống Rút Gọn Link
             </h2>
