@@ -1,7 +1,7 @@
 const Account = require("../models/account.model");
 const UrlModel = require("../models/url.model");
 const { hashAndEncode } = require("../utils/hash.url");
-const deployUrl = 'https://shorted-url-g5gz.onrender.com/'
+const deployUrl = 'http://localhost:3000/'
 
 const encodeUrlController = async (req, res) => {
     try {

@@ -39,7 +39,7 @@ const AboutSection = ({ scrollToSection }) => {
                 <div>
                     <button
                         onClick={scrollToSection}
-                        className="px-8 py-3 bg-gray-900 text-white rounded-full hover:bg-blue-600 transition duration-500 mt-10 font-bold"
+                        className="px-8 py-3 bg-gray-900 text-white rounded-full hover:bg-blue-600 transition duration-500 font-bold"
                         data-aos="fade-left" data-aos-duration="1000"
                     >
                         Trải nghiệm ngay
